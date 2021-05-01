@@ -133,8 +133,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 0.0,
-            "y": 0.0
+            "x": 357.0,
+            "y": -32.0
         },
         "m_Blocks": [
             {
@@ -150,8 +150,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 0.0,
-            "y": 200.0
+            "x": 357.0,
+            "y": 168.00003051757813
         },
         "m_Blocks": [
             {
@@ -419,9 +419,9 @@
     "m_Guid": {
         "m_GuidSerialized": "3e693be7-4f11-4a2f-b7ed-511c223be47d"
     },
-    "m_Name": "TopColor",
+    "m_Name": "BottomColor",
     "m_DefaultReferenceName": "Color_6a302518a0634a9aafd9996a258f76df",
-    "m_OverrideReferenceName": "_TopColor",
+    "m_OverrideReferenceName": "_BottomColor",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -516,8 +516,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -676.0000610351563,
-            "y": -158.99998474121095,
+            "x": -518.9999389648438,
+            "y": -148.0,
             "width": 208.0,
             "height": 326.0
         }
@@ -557,10 +557,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -979.8001098632813,
-            "y": -141.45001220703126,
-            "width": 0.0,
-            "height": 0.0
+            "x": -974.0000610351563,
+            "y": -85.0000228881836,
+            "width": 152.0,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -676,9 +676,9 @@
     "m_Guid": {
         "m_GuidSerialized": "96cbf71b-28f9-4bff-8f7e-7ab9556a9d40"
     },
-    "m_Name": "BottomColor",
+    "m_Name": "TopColor",
     "m_DefaultReferenceName": "Color_9fe25a3f821343979039583e185bd47d",
-    "m_OverrideReferenceName": "_BottomColor",
+    "m_OverrideReferenceName": "_TopColor",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -728,7 +728,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "c032349b24994d0eb2aeaa0291be7865",
     "m_Id": 0,
-    "m_DisplayName": "TopColor",
+    "m_DisplayName": "BottomColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -898,7 +898,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "ec4343ff8983440ea791423db2391c69",
     "m_Id": 0,
-    "m_DisplayName": "BottomColor",
+    "m_DisplayName": "TopColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
