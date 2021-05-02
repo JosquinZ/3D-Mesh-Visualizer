@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069d00369bcd8f240bb139f598d6e52a, type: 3}
+  m_Name: ForestEnvironment
+  m_EditorClassIdentifier: 
+  modelName: ForestEnvironment
+  modelGameObject: {fileID: 6757802547469031277, guid: 54952a544c03b1744815d150c2360a17, type: 3}
+  modelForcedProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
+  forceSkyColor: 1
+  skyColorTop: {r: 0.9607844, g: 0.93725497, b: 0.86666673, a: 0}
+  skyColorBottom: {r: 0.9607844, g: 0.9333334, b: 0.86274517, a: 0}
