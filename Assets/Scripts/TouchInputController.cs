@@ -36,6 +36,7 @@ public class TouchInputController : MonoBehaviour
     private float scaleVelocity = 0;
     [SerializeField]
     private float scaleMultiplier;
+    private float currentTouchesDistance;
 
     [Space(10)]
     [Header("Translate")]
@@ -104,7 +105,7 @@ public class TouchInputController : MonoBehaviour
                     isScaling = true;
                     isTranslating = true;
 
-                    float currentTouchesDistance = Vector2.Distance(touchZero.position, touchOne.position);
+                    currentTouchesDistance = Vector2.Distance(touchZero.position, touchOne.position);
 
                     Vector2 midPoint = (touchZero.position + touchOne.position) / 2;
 
@@ -154,7 +155,7 @@ public class TouchInputController : MonoBehaviour
     {
         if(!isScaling)
         {
-            scaleFactor = Mathf.SmoothDamp(scaleFactor, 1f, ref scaleVelocity, .25f);
+            scaleFactor = Mathf.SmoothDamp(scaleFactor, 1f, ref scaleVelocity, .35f);
             pivotTransform.localScale = Vector3.Lerp(pivotTransform.localScale, pivotTransform.localScale * scaleFactor, Time.deltaTime * scaleMultiplier);
         }
     }
