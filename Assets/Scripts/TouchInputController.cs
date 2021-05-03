@@ -12,10 +12,14 @@ public class TouchInputController : MonoBehaviour
     private Vector3 directionVect;
     private Vector3 rotationDirection;
 
-    public Camera cam;
-    public float rotationMultiplier = 360.0f;
-    public float slerpSpeed = 1.0f;
-    public float releaseSlerpSpeed = 3.0f;
+    [SerializeField]
+    private float rotationMultiplier = 360.0f;
+
+    [SerializeField]
+    private float slerpSpeed = 1.0f;
+
+    [SerializeField]
+    private float releaseSlerpSpeed = 3.0f;
     private bool isRotating = false;
 
 

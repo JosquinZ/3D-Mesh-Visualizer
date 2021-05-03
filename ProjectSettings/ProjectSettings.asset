@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: JZ
   productName: 3D Mesh Visualizer
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -148,6 +148,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.josquinZabka.MeshVisualizer
     Standalone: com.DefaultCompany.3DMeshVisualizer
+    iPhone: com.jz.meshvisualizer
   buildNumber:
     Standalone: 0
     iPhone: 0
