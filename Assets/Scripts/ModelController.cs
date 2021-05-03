@@ -76,6 +76,7 @@ public class ModelController : MonoBehaviour
 
         pivotTransform.localScale = Vector3.one;
         pivotTransform.rotation = Quaternion.identity;
+        pivotTransform.localPosition = Vector3.zero;
 
         Transform modelTransform = pivotTransform.Find(modelData.modelName);
         modelTransform.gameObject.SetActive(true);
@@ -121,10 +122,5 @@ public class ModelController : MonoBehaviour
 
             }
         }
-    }
-
-    void Update()
-    {
-        
     }
 }

@@ -4,53 +4,37 @@ using UnityEngine;
 
 public class TouchInputController : MonoBehaviour
 {
-
-    private enum TouchState
-    {
-        None,
-        Rotate,
-        Zoom,
-        Translate
-    }
-
-    [SerializeField]
-    private TouchState currentTouchState = TouchState.None;
-
     [SerializeField]
     private Transform pivotTransform;
 
-    //Rotation
-    [SerializeField]
-    private float rotationSpeed = 1f;
-
+    [Header("Rotation")]
     private Vector2 prevTouchPos;
     private Vector3 directionVect;
     private Vector3 rotationDirection;
 
     public Camera cam;
-    [Space(10)]
     public float rotationMultiplier = 360.0f;
     public float slerpSpeed = 1.0f;
     public float releaseSlerpSpeed = 3.0f;
     private bool isRotating = false;
 
 
-    //Zoom
+    [Space(10)]
+    [Header("Scale")]
+
     [SerializeField]
     private float zoomDeadZone = 1f;
     private bool isScaling = false;
-
     private float initialTouchesDistance;
     private float prevTouchesDistance;
     private Vector3 pivotInitialScale = Vector3.one;
-    private Vector3 rotationRemaining;
     private float scaleFactor;
     private float scaleVelocity = 0;
     [SerializeField]
     private float scaleMultiplier;
 
-
-    //Translate
+    [Space(10)]
+    [Header("Translate")]
     private Vector2 prevMidPoint;
     private bool isTranslating = false;
     [SerializeField]
@@ -59,12 +43,6 @@ public class TouchInputController : MonoBehaviour
     private float translateMultiplier;
     private Vector3 translateVelocity = Vector3.zero;
 
-
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         if(Input.touchCount > 0)
@@ -72,39 +50,32 @@ public class TouchInputController : MonoBehaviour
             if(Input.touchCount == 1)
             {
                 Touch touch = Input.GetTouch(0);
-                currentTouchState = TouchState.Rotate;
 
                 if(isScaling)
                 {
-                    prevTouchPos = touch.position;
                     isScaling = false;
+                }
+                if(isTranslating)
+                {
                     isTranslating = false;
-
                 }
 
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
-                        prevTouchPos = touch.position;
                         isRotating = true;
-
                         break;
-
                     case TouchPhase.Moved:
-                        rotationDirection = touch.position - prevTouchPos;
+                        rotationDirection = touch.deltaPosition;
                         rotationDirection.z = 0.0f;
-                        prevTouchPos = touch.position;
                         break;
                     case TouchPhase.Stationary:
                         rotationDirection = Vector3.zero;
+                        isRotating = false;
                         break;
                     case TouchPhase.Ended:
                         rotationDirection = Vector3.zero;
                         isRotating = false;
-
-                        currentTouchState = TouchState.None;
-                        break;
-                    default:
                         break;
                 }
             }
@@ -115,6 +86,7 @@ public class TouchInputController : MonoBehaviour
 
                 if (touchOne.phase == TouchPhase.Began)
                 {
+                    rotationDirection = Vector3.zero;
                     isRotating = false;
                     initialTouchesDistance = Vector2.Distance(touchZero.position, touchOne.position);
                     prevTouchesDistance = Vector2.Distance(touchZero.position, touchOne.position);
@@ -122,55 +94,33 @@ public class TouchInputController : MonoBehaviour
                     pivotInitialScale = pivotTransform.localScale;
                     prevMidPoint = (touchZero.position + touchOne.position) / 2;
                 }
-                else
+                else if(touchZero.phase != TouchPhase.Moved || touchOne.phase == TouchPhase.Moved
+                    || touchZero.phase == TouchPhase.Stationary || touchOne.phase == TouchPhase.Stationary)
                 {
+                    isScaling = true;
+                    isTranslating = true;
+
                     float currentTouchesDistance = Vector2.Distance(touchZero.position, touchOne.position);
-                    if(Mathf.Abs(prevTouchesDistance - currentTouchesDistance) < zoomDeadZone)
+
+                    Vector2 midPoint = (touchZero.position + touchOne.position) / 2;
+
+                    if (Mathf.Abs(prevTouchesDistance - currentTouchesDistance) < zoomDeadZone)
                     {
-                        if(currentTouchState == TouchState.Zoom)
-                        {
-                            prevMidPoint = (touchZero.position + touchOne.position) / 2;
-                            isScaling = false;
-                        }
-                        isTranslating = true;
-                        currentTouchState = TouchState.Translate;
-                        Vector2 midPoint = (touchZero.position + touchOne.position) / 2;
-
-
                         Vector3 delta = midPoint - prevMidPoint;
-                        //pivotTransform.position += delta * 0.01f;
                         translateDirection = delta;
-                        //pivotTransform.position = Vector3.Lerp(pivotTransform.position, pivotTransform.position += delta, Time.deltaTime * .1f);
                         prevMidPoint = midPoint;
                     }
-                    else
-                    {
-                        if(currentTouchState == TouchState.Translate)
-                        {
-                            isTranslating = false;
-                        }
 
-                        currentTouchState = TouchState.Zoom;
-                        isScaling = true;
-                        //Set scale based on distance
-                        //scaleDirection = pivotInitialScale * (currentTouchesDistance / initialTouchesDistance);
-                        scaleFactor = currentTouchesDistance / initialTouchesDistance;
-                        //pivotTransform.localScale = pivotInitialScale * (currentTouchesDistance / initialTouchesDistance);
-
-                    }
+                    scaleFactor = currentTouchesDistance / initialTouchesDistance;
+                    pivotTransform.localScale = pivotInitialScale * scaleFactor;
+                    prevMidPoint = (touchZero.position + touchOne.position) / 2;
                     prevTouchesDistance = Vector2.Distance(touchZero.position, touchOne.position);
-
-                }
-
-                if (touchZero.phase == TouchPhase.Ended || touchOne.phase == TouchPhase.Ended)
-                {
-                    initialTouchesDistance = Vector2.Distance(touchZero.position, touchOne.position);
-                    pivotInitialScale = pivotTransform.localScale;
                 }
             }
         }
         else
         {
+            isRotating = false;
             isTranslating = false;
             isScaling = false;
         }
@@ -200,12 +150,9 @@ public class TouchInputController : MonoBehaviour
     {
         if(!isScaling)
         {
-            //scaleFactor = Vector3.SmoothDamp(scaleFactor, Vector3.zero, ref scaleVelocity, .25f);
-            scaleFactor = Mathf.SmoothDamp(scaleFactor, 1, ref scaleVelocity, .25f);
+            scaleFactor = Mathf.SmoothDamp(scaleFactor, 1f, ref scaleVelocity, .25f);
+            pivotTransform.localScale = Vector3.Lerp(pivotTransform.localScale, pivotTransform.localScale * scaleFactor, Time.deltaTime * scaleMultiplier);
         }
-
-        pivotTransform.localScale = Vector3.Lerp(pivotTransform.localScale, pivotTransform.localScale * scaleFactor, Time.deltaTime * scaleMultiplier);
-
     }
 
     void UpdateTranslate()
@@ -214,7 +161,6 @@ public class TouchInputController : MonoBehaviour
         {
             translateDirection = Vector3.SmoothDamp(translateDirection, Vector3.zero, ref translateVelocity, .25f);
         }
-
         pivotTransform.position = Vector3.Lerp(pivotTransform.position, pivotTransform.position + translateDirection, Time.deltaTime * translateMultiplier);
     }
 }

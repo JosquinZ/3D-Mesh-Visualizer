@@ -16,6 +16,8 @@ public class BackgroundController : MonoBehaviour
 
     public void SetSkyboxColor(BackgroundData backgroundData)
     {
+        RenderSettings.skybox.DOKill();
+
         RenderSettings.skybox.DOBlendableColor(backgroundData.bottomColor, "_BottomColor", 2f);
         RenderSettings.skybox.DOBlendableColor(backgroundData.topColor, "_TopColor", 2f);
     }
