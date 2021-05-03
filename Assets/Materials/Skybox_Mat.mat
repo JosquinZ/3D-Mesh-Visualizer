@@ -151,12 +151,12 @@ Material:
     - Color_A2AAE5B5: {r: 0.11372546, g: 0.62745106, b: 0.8352941, a: 0}
     - Vector2_C848BFFB: {r: 0.25, g: 0.25, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BottomColor: {r: 0.15686275, g: 0.2471912, b: 0.39607844, a: 0}
+    - _BottomColor: {r: 0.9918518, g: 0.73757493, b: 0.17913656, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GroundColor: {r: 1, g: 1, b: 1, a: 1}
     - _SkyTint: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tint: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-    - _TopColor: {r: 0.6784314, g: 0.2784314, b: 0.37781188, a: 0}
+    - _TopColor: {r: 0.9918518, g: 0.19460632, b: 0.87909585, a: 0}
   m_BuildTextureStacks: []
